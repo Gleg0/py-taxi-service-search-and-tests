@@ -11,15 +11,23 @@ class SearchTests(TestCase):
 
     def setUp(self):
         self.user = User.objects.create_user(
-            username="driver", 
+            username="driver",
             password="pass",
             license_number="DRIVER001"
         )
         self.client.login(username="driver", password="pass")
 
     def test_search_driver(self):
-        d1 = User.objects.create_user(username="john", password="pass", license_number="DRIVER002")
-        d2 = User.objects.create_user(username="alex", password="pass", license_number="DRIVER003")
+        d1 = User.objects.create_user(
+            username="john",
+            password="pass",
+            license_number="DRIVER002"
+        )
+        d2 = User.objects.create_user(
+            username="alex",
+            password="pass",
+            license_number="DRIVER003"
+        )
 
         url = reverse("taxi:driver-list")
         response = self.client.get(url, {"q": "john"})
